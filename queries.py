@@ -29,8 +29,8 @@ def main():
         ORDER BY w.unsafe_percent DESC
     """)
 
-    run_query(db, "Recent GDP", """
-        SELECT tp.year, e.value
+    run_query(db, "Recent GDP Growth", """
+        SELECT tp.year, ROUND(e.value, 2)
         FROM economic_data e
         JOIN time_periods tp ON e.period_id = tp.period_id
         WHERE e.indicator_code='NY.GDP.MKTP.KD.ZG'
@@ -71,7 +71,7 @@ def main():
     """)
 
     run_query(db, "Macroeconomic Snapshot", """
-        SELECT tp.year, indicator_code, value, unit, source
+        SELECT tp.year, indicator_code, ROUND(value,2), unit, source
         FROM macroeconomic_data m
         JOIN time_periods tp ON m.period_id = tp.period_id
         ORDER BY tp.year DESC, indicator_code
@@ -156,30 +156,70 @@ def main():
         ORDER BY resource_type
     """)
 
-    run_query(db, "Social & Institutional (by domain)", """
-        SELECT sid.domain, sid.indicator, sid.value, sid.unit,
-               sid.source, tp.year
+    run_query(db, "Health Indicators — Life Expectancy (WHO)", """
+        SELECT tp.year, ROUND(sid.value, 1), sid.disaggregation
         FROM social_institutional_data sid
         JOIN time_periods tp ON sid.period_id = tp.period_id
-        WHERE sid.domain != 'health'
-        ORDER BY sid.domain, sid.indicator, tp.year DESC
+        WHERE sid.indicator='Life expectancy at birth'
+        ORDER BY tp.year
     """)
 
-    run_query(db, "Health Indicators (WHO GHO)", """
-        SELECT sid.indicator, ROUND(sid.value,2) AS val, sid.unit,
-               tp.year, sid.disaggregation
+    run_query(db, "Health Indicators — UHC Coverage (WHO)", """
+        SELECT sid.indicator, ROUND(sid.value, 1), tp.year
+        FROM social_institutional_data sid
+        JOIN time_periods tp ON sid.period_id = tp.period_id
+        WHERE sid.indicator LIKE 'UHC%'
+        ORDER BY sid.indicator, tp.year DESC
+    """)
+
+    run_query(db, "Health Indicators — Immunization (WHO)", """
+        SELECT sid.indicator, ROUND(sid.value, 1), sid.unit, tp.year
+        FROM social_institutional_data sid
+        JOIN time_periods tp ON sid.period_id = tp.period_id
+        WHERE sid.indicator LIKE '%immunization%' OR sid.indicator LIKE '%coverage'
+        ORDER BY sid.indicator, tp.year DESC
+    """)
+
+    run_query(db, "Health Indicators — Nutrition (WHO)", """
+        SELECT sid.indicator, ROUND(sid.value, 1), sid.unit, tp.year
+        FROM social_institutional_data sid
+        JOIN time_periods tp ON sid.period_id = tp.period_id
+        WHERE (sid.indicator LIKE '%nutrition%' OR sid.indicator LIKE '%stunting%'
+               OR sid.indicator LIKE '%wasting%' OR sid.indicator LIKE '%anemia%'
+               OR sid.indicator LIKE '%breastfeeding%' OR sid.indicator LIKE '%underweight%')
+          AND sid.domain='health'
+        ORDER BY sid.indicator, tp.year DESC
+    """)
+
+    run_query(db, "Health Indicators — NCD Risk Factors (WHO)", """
+        SELECT sid.indicator, ROUND(sid.value, 1), sid.unit, tp.year
         FROM social_institutional_data sid
         JOIN time_periods tp ON sid.period_id = tp.period_id
         WHERE sid.domain='health'
+          AND (sid.indicator LIKE '%BMI%' OR sid.indicator LIKE '%tobacco%'
+               OR sid.indicator LIKE '%alcohol%' OR sid.indicator LIKE '%blood glucose%'
+               OR sid.indicator LIKE '%cholesterol%' OR sid.indicator LIKE '%hypertension%')
+        ORDER BY sid.indicator, tp.year DESC
+    """)
+
+    run_query(db, "Health Indicators — HIV/TB/Malaria (WHO)", """
+        SELECT sid.indicator, ROUND(sid.value, 1), sid.unit, tp.year
+        FROM social_institutional_data sid
+        JOIN time_periods tp ON sid.period_id = tp.period_id
+        WHERE sid.domain='health'
+          AND (sid.indicator LIKE 'HIV%' OR sid.indicator LIKE 'TB%'
+               OR sid.indicator LIKE 'Malaria%')
         ORDER BY sid.indicator, tp.year DESC
     """)
 
     run_query(db, "Displacement Data (IOM DTM)", """
-        SELECT tp.year, total_idps, male_idps, female_idps,
-               displacement_reason, round_number
+        SELECT dd.source, tp.year, SUM(dd.total_idps) AS total_idps,
+               SUM(dd.male_idps) AS male, SUM(dd.female_idps) AS female,
+               dd.displacement_reason
         FROM displacement_data dd
         JOIN time_periods tp ON dd.period_id = tp.period_id
-        ORDER BY tp.year DESC, round_number DESC
+        GROUP BY dd.source, tp.year, dd.displacement_reason
+        ORDER BY tp.year DESC
     """)
 
     run_query(db, "NDC 2030 Targets", """

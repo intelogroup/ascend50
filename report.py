@@ -130,9 +130,15 @@ def main():
         if rows:
             content += section(f"{dom.title()} Indicators", ["Indicator","Value","Unit","Year","Source"], rows)
 
-    content += section("Health Indicators (WHO)", ["Indicator","Value","Unit","Year","Sex"], db.execute("SELECT sid.indicator,ROUND(sid.value,2),sid.unit,tp.year,sid.disaggregation FROM social_institutional_data sid JOIN time_periods tp ON sid.period_id=tp.period_id WHERE sid.domain='health' AND sid.location_id=1 ORDER BY sid.indicator,tp.year DESC LIMIT 40"))
+    content += section("Life Expectancy (WHO)", ["Year","Value","Sex"], db.execute("SELECT tp.year,ROUND(sid.value,1),sid.disaggregation FROM social_institutional_data sid JOIN time_periods tp ON sid.period_id=tp.period_id WHERE sid.indicator='Life expectancy at birth' ORDER BY tp.year"))
 
-    content += section("Displacement Data (IOM)", ["Year","Total IDPs","Male","Female","Reason","Round"], db.execute("SELECT tp.year,dd.total_idps,dd.male_idps,dd.female_idps,dd.displacement_reason,dd.round_number FROM displacement_data dd JOIN time_periods tp ON dd.period_id=tp.period_id ORDER BY tp.year DESC,dd.round_number DESC LIMIT 10"))
+    content += section("Health Indicators — UHC (WHO)", ["Indicator","Value","Year"], db.execute("SELECT sid.indicator,ROUND(sid.value,1),tp.year FROM social_institutional_data sid JOIN time_periods tp ON sid.period_id=tp.period_id WHERE sid.indicator LIKE 'UHC%' ORDER BY sid.indicator,tp.year DESC"))
+
+    content += section("Health Indicators — Immunization (WHO)", ["Indicator","%","Year"], db.execute("SELECT sid.indicator,ROUND(sid.value,1),tp.year FROM social_institutional_data sid JOIN time_periods tp ON sid.period_id=tp.period_id WHERE (sid.indicator LIKE '%immunization%' OR sid.indicator LIKE '%coverage') AND sid.domain='health' ORDER BY sid.indicator,tp.year DESC"))
+
+    content += section("Health Indicators — Nutrition (WHO)", ["Indicator","Value","Unit","Year"], db.execute("SELECT sid.indicator,ROUND(sid.value,1),sid.unit,tp.year FROM social_institutional_data sid JOIN time_periods tp ON sid.period_id=tp.period_id WHERE (sid.indicator LIKE '%nutrition%' OR sid.indicator LIKE '%stunting%' OR sid.indicator LIKE '%wasting%' OR sid.indicator LIKE '%anemia%' OR sid.indicator LIKE '%breastfeeding%' OR sid.indicator LIKE '%underweight%') AND sid.domain='health' ORDER BY sid.indicator,tp.year DESC"))
+
+    content += section("Displacement Data (IOM)", ["Source","Year","Total IDPs","Male","Female","Reason"], db.execute("SELECT dd.source,tp.year,SUM(dd.total_idps),SUM(dd.male_idps),SUM(dd.female_idps),dd.displacement_reason FROM displacement_data dd JOIN time_periods tp ON dd.period_id=tp.period_id GROUP BY dd.source,tp.year,dd.displacement_reason ORDER BY tp.year DESC"))
 
     content += section("Strategic Plans", ["Plan","Lead","Timeframe","Year"], db.execute("SELECT plan_name,lead_org,timeframe,year_published FROM plan_registry ORDER BY year_published"))
 
