@@ -132,6 +132,37 @@ def main():
         ORDER BY tp.year DESC, l.admin1_name
     """)
 
+    run_query(db, "Electricity Access", """
+        SELECT tp.year, access_rate_pct, rural_access_pct,
+               population_without_access, grid_status, source
+        FROM electricity_access ea
+        JOIN time_periods tp ON ea.period_id = tp.period_id
+        WHERE ea.location_id=1
+        ORDER BY tp.year DESC
+    """)
+
+    run_query(db, "Energy Production & Consumption", """
+        SELECT tp.year, energy_type, metric, value, unit, source
+        FROM energy_production_consumption ep
+        JOIN time_periods tp ON ep.period_id = tp.period_id
+        ORDER BY tp.year DESC, energy_type, metric
+    """)
+
+    run_query(db, "Renewable Energy Potential", """
+        SELECT resource_type, exploited_capacity_mw,
+               unexploited_potential_mw, notes, source
+        FROM renewable_potential
+        WHERE location_id=1
+        ORDER BY resource_type
+    """)
+
+    run_query(db, "NDC 2030 Targets", """
+        SELECT resource_type, metric_value, metric_unit, notes
+        FROM renewable_potential
+        WHERE metric_name='ndc_target_pct' AND location_id=1
+        ORDER BY resource_type
+    """)
+
     run_query(db, "Humanitarian Funding (HDX)", """
         SELECT tp.year, ROUND(SUM(hh.indicator_value)) AS total_funding_usd,
                hh.disaggregation

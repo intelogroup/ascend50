@@ -292,6 +292,52 @@ CREATE TABLE IF NOT EXISTS plan_registry (
 CREATE UNIQUE INDEX IF NOT EXISTS idx_plan_uniq ON plan_registry(
     plan_name, lead_org
 );
+
+CREATE TABLE IF NOT EXISTS electricity_access (
+    record_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    location_id INTEGER REFERENCES locations(location_id),
+    period_id INTEGER REFERENCES time_periods(period_id),
+    access_rate_pct NUMERIC(5,2),
+    rural_access_pct NUMERIC(5,2),
+    population_without_access INTEGER,
+    grid_status TEXT,
+    source VARCHAR(50) NOT NULL
+);
+
+CREATE UNIQUE INDEX IF NOT EXISTS idx_elec_uniq ON electricity_access(
+    location_id, period_id, source, COALESCE(grid_status,'')
+);
+
+CREATE TABLE IF NOT EXISTS energy_production_consumption (
+    record_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    period_id INTEGER REFERENCES time_periods(period_id),
+    energy_type VARCHAR(50) NOT NULL,
+    metric VARCHAR(50) NOT NULL,
+    value NUMERIC(20,4),
+    unit VARCHAR(30),
+    source VARCHAR(50) NOT NULL
+);
+
+CREATE UNIQUE INDEX IF NOT EXISTS idx_energy_uniq ON energy_production_consumption(
+    period_id, energy_type, metric, source
+);
+
+CREATE TABLE IF NOT EXISTS renewable_potential (
+    record_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    location_id INTEGER REFERENCES locations(location_id),
+    resource_type VARCHAR(50) NOT NULL,
+    exploited_capacity_mw NUMERIC(10,2),
+    unexploited_potential_mw NUMERIC(10,2),
+    metric_name TEXT,
+    metric_value REAL,
+    metric_unit TEXT,
+    notes TEXT,
+    source VARCHAR(50) NOT NULL
+);
+
+CREATE UNIQUE INDEX IF NOT EXISTS idx_renew_uniq ON renewable_potential(
+    location_id, resource_type, source
+);
 """
 
 

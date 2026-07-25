@@ -13,7 +13,7 @@ td{padding:4px 8px;border-top:1px solid #eee;font-size:13px;vertical-align:top}
 </style></head>
 <body>
 <h1>Haiti Data Hub &mdash; Report</h1>
-<p class=summary>Generated: 2026-07-25 16:18 &middot; 573 rows across 19 tables &middot; DB: 212 KB</p>
+<p class=summary>Generated: 2026-07-25 16:23 &middot; 598 rows across 22 tables &middot; DB: 236 KB</p>
 <table class=overview><tr><th>Table</th><th>Rows</th></tr>
 <tr><td>locations</td><td>13</td></tr>
 <tr><td>time_periods</td><td>31</td></tr>
@@ -34,6 +34,9 @@ td{padding:4px 8px;border-top:1px solid #eee;font-size:13px;vertical-align:top}
 <tr><td>bilateral_trade_dr</td><td>10</td></tr>
 <tr><td>local_production</td><td>11</td></tr>
 <tr><td>plan_registry</td><td>10</td></tr>
+<tr><td>electricity_access</td><td>6</td></tr>
+<tr><td>energy_production_consumption</td><td>12</td></tr>
+<tr><td>renewable_potential</td><td>7</td></tr>
 </table>
 <h2>Departments <span style=font-weight:400;font-size:13px;color:#888>(10 rows)</span></h2>
 <table><tr><th>Code</th><th>Name</th></tr>
@@ -91,24 +94,24 @@ td{padding:4px 8px;border-top:1px solid #eee;font-size:13px;vertical-align:top}
 </div>
 <h2>Population by Dept <span style=font-weight:400;font-size:13px;color:#888>(36 rows)</span></h2>
 <table><tr><th>Dept</th><th>Population</th><th>Age Range</th></tr>
-<tr><td>Artibonite</td><td>27489.0</td><td>0-4</td></tr>
-<tr><td>Artibonite</td><td>37658.0</td><td>10-14</td></tr>
-<tr><td>Artibonite</td><td>44726.0</td><td>15-19</td></tr>
-<tr><td>Artibonite</td><td>51668.0</td><td>20-24</td></tr>
-<tr><td>Artibonite</td><td>42576.0</td><td>25-29</td></tr>
-<tr><td>Artibonite</td><td>44960.0</td><td>30-34</td></tr>
-<tr><td>Artibonite</td><td>42513.0</td><td>35-39</td></tr>
-<tr><td>Artibonite</td><td>42177.0</td><td>40-44</td></tr>
-<tr><td>Artibonite</td><td>36435.0</td><td>45-49</td></tr>
-<tr><td>Artibonite</td><td>35684.0</td><td>5-9</td></tr>
-<tr><td>Artibonite</td><td>26948.0</td><td>50-54</td></tr>
-<tr><td>Artibonite</td><td>19533.0</td><td>55-59</td></tr>
-<tr><td>Artibonite</td><td>13769.0</td><td>60-64</td></tr>
-<tr><td>Artibonite</td><td>9882.0</td><td>65-69</td></tr>
-<tr><td>Artibonite</td><td>4394.0</td><td>70-74</td></tr>
-<tr><td>Artibonite</td><td>2299.0</td><td>75-79</td></tr>
-<tr><td>Artibonite</td><td>1213.0</td><td>80+</td></tr>
-<tr><td>Artibonite</td><td>483924.0</td><td>all</td></tr>
+<tr><td>Artibonite</td><td>19539.0</td><td>0-4</td></tr>
+<tr><td>Artibonite</td><td>21830.0</td><td>10-14</td></tr>
+<tr><td>Artibonite</td><td>22635.0</td><td>15-19</td></tr>
+<tr><td>Artibonite</td><td>23152.0</td><td>20-24</td></tr>
+<tr><td>Artibonite</td><td>19551.0</td><td>25-29</td></tr>
+<tr><td>Artibonite</td><td>20265.0</td><td>30-34</td></tr>
+<tr><td>Artibonite</td><td>18523.0</td><td>35-39</td></tr>
+<tr><td>Artibonite</td><td>17128.0</td><td>40-44</td></tr>
+<tr><td>Artibonite</td><td>13978.0</td><td>45-49</td></tr>
+<tr><td>Artibonite</td><td>21377.0</td><td>5-9</td></tr>
+<tr><td>Artibonite</td><td>9572.0</td><td>50-54</td></tr>
+<tr><td>Artibonite</td><td>6661.0</td><td>55-59</td></tr>
+<tr><td>Artibonite</td><td>4788.0</td><td>60-64</td></tr>
+<tr><td>Artibonite</td><td>3469.0</td><td>65-69</td></tr>
+<tr><td>Artibonite</td><td>1859.0</td><td>70-74</td></tr>
+<tr><td>Artibonite</td><td>1016.0</td><td>75-79</td></tr>
+<tr><td>Artibonite</td><td>773.0</td><td>80+</td></tr>
+<tr><td>Artibonite</td><td>226116.0</td><td>all</td></tr>
 <tr><td>Ouest</td><td>27489.0</td><td>0-4</td></tr>
 <tr><td>Ouest</td><td>37658.0</td><td>10-14</td></tr>
 <tr><td>Ouest</td><td>44726.0</td><td>15-19</td></tr>
@@ -141,24 +144,24 @@ td{padding:4px 8px;border-top:1px solid #eee;font-size:13px;vertical-align:top}
 </table>
 <h2>Conflict Events <span style=font-weight:400;font-size:13px;color:#888>(18 rows)</span></h2>
 <table><tr><th>Dept</th><th>Admin2</th><th>Severity</th><th>Events</th><th>Year</th></tr>
-<tr><td>Artibonite</td><td></td><td>civilian_targeting fatalities=50</td><td>27.0</td><td>2026</td></tr>
 <tr><td>Ouest</td><td>Port-au-Prince</td><td>civilian_targeting fatalities=50</td><td>27.0</td><td>2026</td></tr>
-<tr><td>Artibonite</td><td></td><td>civilian_targeting fatalities=237</td><td>75.0</td><td>2025</td></tr>
+<tr><td>Artibonite</td><td></td><td>civilian_targeting fatalities=0</td><td>0.0</td><td>2026</td></tr>
 <tr><td>Ouest</td><td>Port-au-Prince</td><td>civilian_targeting fatalities=237</td><td>75.0</td><td>2025</td></tr>
-<tr><td>Artibonite</td><td></td><td>civilian_targeting fatalities=124</td><td>43.0</td><td>2024</td></tr>
+<tr><td>Artibonite</td><td></td><td>civilian_targeting fatalities=3</td><td>3.0</td><td>2025</td></tr>
 <tr><td>Ouest</td><td>Port-au-Prince</td><td>civilian_targeting fatalities=124</td><td>43.0</td><td>2024</td></tr>
-<tr><td>Artibonite</td><td></td><td>civilian_targeting fatalities=13</td><td>23.0</td><td>2023</td></tr>
+<tr><td>Artibonite</td><td></td><td>civilian_targeting fatalities=0</td><td>1.0</td><td>2024</td></tr>
 <tr><td>Ouest</td><td>Port-au-Prince</td><td>civilian_targeting fatalities=13</td><td>23.0</td><td>2023</td></tr>
-<tr><td>Artibonite</td><td></td><td>civilian_targeting fatalities=30</td><td>24.0</td><td>2022</td></tr>
+<tr><td>Artibonite</td><td></td><td>civilian_targeting fatalities=2</td><td>2.0</td><td>2023</td></tr>
 <tr><td>Ouest</td><td>Port-au-Prince</td><td>civilian_targeting fatalities=30</td><td>24.0</td><td>2022</td></tr>
-<tr><td>Artibonite</td><td></td><td>civilian_targeting fatalities=4</td><td>27.0</td><td>2021</td></tr>
+<tr><td>Artibonite</td><td></td><td>civilian_targeting fatalities=0</td><td>0.0</td><td>2022</td></tr>
 <tr><td>Ouest</td><td>Port-au-Prince</td><td>civilian_targeting fatalities=4</td><td>27.0</td><td>2021</td></tr>
-<tr><td>Artibonite</td><td></td><td>civilian_targeting fatalities=7</td><td>12.0</td><td>2020</td></tr>
+<tr><td>Artibonite</td><td></td><td>civilian_targeting fatalities=0</td><td>0.0</td><td>2021</td></tr>
 <tr><td>Ouest</td><td>Port-au-Prince</td><td>civilian_targeting fatalities=7</td><td>12.0</td><td>2020</td></tr>
-<tr><td>Artibonite</td><td></td><td>civilian_targeting fatalities=3</td><td>3.0</td><td>2019</td></tr>
+<tr><td>Artibonite</td><td></td><td>civilian_targeting fatalities=0</td><td>2.0</td><td>2020</td></tr>
 <tr><td>Ouest</td><td>Port-au-Prince</td><td>civilian_targeting fatalities=3</td><td>3.0</td><td>2019</td></tr>
-<tr><td>Artibonite</td><td></td><td>civilian_targeting fatalities=0</td><td>0.0</td><td>2018</td></tr>
+<tr><td>Artibonite</td><td></td><td>civilian_targeting fatalities=0</td><td>0.0</td><td>2019</td></tr>
 <tr><td>Ouest</td><td>Port-au-Prince</td><td>civilian_targeting fatalities=0</td><td>0.0</td><td>2018</td></tr>
+<tr><td>Artibonite</td><td></td><td>civilian_targeting fatalities=0</td><td>0.0</td><td>2018</td></tr>
 </table>
 <h2>Poverty Headcount (%) <span style=font-weight:400;font-size:13px;color:#888>(8 rows)</span></h2>
 <table><tr><th>Dept</th><th>2012</th><th>2016</th></tr>
@@ -183,6 +186,47 @@ td{padding:4px 8px;border-top:1px solid #eee;font-size:13px;vertical-align:top}
 <tr><td>2022</td><td>14400156.0</td><td>appeal=FHTI2223 requirements=145600234.0 funding_pct=10.0</td></tr>
 <tr><td>2021</td><td>77677979.0</td><td>appeal=FHTI2122 requirements=187295000.0 funding_pct=41.0</td></tr>
 <tr><td>2020</td><td>153296222.0</td><td>appeal=HHTI20 requirements=471993035.0 funding_pct=32.0</td></tr>
+</table>
+<h2>Electricity Access <span style=font-weight:400;font-size:13px;color:#888>(6 rows)</span></h2>
+<table><tr><th>Year</th><th>Access %</th><th>Rural %</th><th>Without Access</th><th>Status</th></tr>
+<tr><td>2024</td><td></td><td></td><td></td><td>isolated_grids_9</td></tr>
+<tr><td>2024</td><td></td><td></td><td></td><td>municipal_grids_30plus</td></tr>
+<tr><td>2024</td><td></td><td></td><td></td><td>self_generation_mw_500</td></tr>
+<tr><td>2021</td><td>47</td><td></td><td>6000000</td><td>national</td></tr>
+<tr><td>2021</td><td>33</td><td></td><td></td><td>reliable</td></tr>
+<tr><td>2021</td><td></td><td>2</td><td></td><td>rural</td></tr>
+</table>
+<h2>Energy Production/Consumption <span style=font-weight:400;font-size:13px;color:#888>(12 rows)</span></h2>
+<table><tr><th>Year</th><th>Type</th><th>Metric</th><th>Value</th><th>Unit</th></tr>
+<tr><td>2024</td><td>hydro</td><td>exploited_capacity_mw</td><td>60</td><td>MW</td></tr>
+<tr><td>2024</td><td>hydro</td><td>peligre_capacity_mw</td><td>54</td><td>MW</td></tr>
+<tr><td>2024</td><td>hydro</td><td>unexploited_potential_mw</td><td>154</td><td>MW</td></tr>
+<tr><td>2024</td><td>oil</td><td>consumption_bpd</td><td>11656</td><td>barrels/day</td></tr>
+<tr><td>2024</td><td>oil</td><td>consumption_per_capita_gpy</td><td>15</td><td>gallons/year</td></tr>
+<tr><td>2024</td><td>solar</td><td>irradiation_kwh_m2_day</td><td>6</td><td>kWh/m2/day</td></tr>
+<tr><td>2024</td><td>solar</td><td>irradiation_max_kwh_m2_day</td><td>8</td><td>kWh/m2/day</td></tr>
+<tr><td>2024</td><td>solar</td><td>hybrid_cost_per_kwh</td><td>0.375</td><td>USD/kWh</td></tr>
+<tr><td>2024</td><td>wind</td><td>speed_ms</td><td>8</td><td>m/s at 80m</td></tr>
+<tr><td>2024</td><td>wind</td><td>potential_mw</td><td>50</td><td>MW</td></tr>
+<tr><td>2022</td><td>oil</td><td>imports_usd</td><td>525000000</td><td>USD</td></tr>
+<tr><td>2022</td><td>oil</td><td>imports_from_us_pct</td><td>95</td><td>percent</td></tr>
+</table>
+<h2>Renewable Potential <span style=font-weight:400;font-size:13px;color:#888>(1 rows)</span></h2>
+<table><tr><th>Type</th><th>Exploited MW</th><th>Unexploited MW</th><th>Notes</th></tr>
+<tr><td>hydro</td><td>60</td><td>154</td><td>54 MW Peligre plant</td></tr>
+</table>
+<h3>NDC 2030 Renewable Targets (%)</h3><div style=font-size:13px>
+<div style=margin:2px 0><span style=display:inline-block;width:120px>biomass</span><span class=bar style=width:68px;background:#4a7></span> 5.6</div>
+<div style=margin:2px 0><span style=display:inline-block;width:120px>hydro</span><span class=bar style=width:300px;background:#4a7></span> 24.5</div>
+<div style=margin:2px 0><span style=display:inline-block;width:120px>solar</span><span class=bar style=width:91px;background:#4a7></span> 7.5</div>
+<div style=margin:2px 0><span style=display:inline-block;width:120px>wind</span><span class=bar style=width:115px;background:#4a7></span> 9.4</div>
+</div>
+<h2>NDC 2030 Targets <span style=font-weight:400;font-size:13px;color:#888>(4 rows)</span></h2>
+<table><tr><th>Type</th><th>Target %</th><th>Target</th></tr>
+<tr><td>biomass</td><td>5.6%</td><td>percent</td></tr>
+<tr><td>hydro</td><td>24.5%</td><td>percent</td></tr>
+<tr><td>solar</td><td>7.5%</td><td>percent</td></tr>
+<tr><td>wind</td><td>9.4%</td><td>percent</td></tr>
 </table>
 <h2>Strategic Plans <span style=font-weight:400;font-size:13px;color:#888>(10 rows)</span></h2>
 <table><tr><th>Plan</th><th>Lead</th><th>Timeframe</th><th>Year</th></tr>

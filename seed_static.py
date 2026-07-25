@@ -151,6 +151,40 @@ LOCAL_PRODUCTION = [
     (2024, "manufacturing", "all", "value_added_gourdes", 240.8e9, "constant_2020_Gourdes", "UN"),
 ]
 
+ENERGY_ACCESS = [
+    ("HTI", 2021, 47.0, None, 6000000, "national", "WorldBank"),
+    ("HTI", 2021, None, 2.0, None, "rural", "WorldBank"),
+    ("HTI", 2021, 33.0, None, None, "reliable", "WorldBank"),
+    ("HTI", 2024, None, None, None, "isolated_grids_9", "ANARSE"),
+    ("HTI", 2024, None, None, None, "municipal_grids_30plus", "ANARSE"),
+    ("HTI", 2024, None, None, None, "self_generation_mw_500", "ANARSE"),
+]
+
+ENERGY_PRODUCTION = [
+    (2024, "oil", "consumption_bpd", 11656, "barrels/day", "Worldometer"),
+    (2024, "oil", "consumption_per_capita_gpy", 15, "gallons/year", "Worldometer"),
+    (2022, "oil", "imports_usd", 525e6, "USD", "OEC"),
+    (2022, "oil", "imports_from_us_pct", 95, "percent", "OEC"),
+    (2024, "hydro", "exploited_capacity_mw", 60, "MW", "BME"),
+    (2024, "hydro", "peligre_capacity_mw", 54, "MW", "BME"),
+    (2024, "hydro", "unexploited_potential_mw", 154, "MW", "BME"),
+    (2024, "solar", "irradiation_kwh_m2_day", 6.0, "kWh/m2/day", "BME"),
+    (2024, "solar", "irradiation_max_kwh_m2_day", 8.0, "kWh/m2/day", "BME"),
+    (2024, "solar", "hybrid_cost_per_kwh", 0.375, "USD/kWh", "BME"),
+    (2024, "wind", "speed_ms", 8.0, "m/s at 80m", "BME"),
+    (2024, "wind", "potential_mw", 50, "MW", "BME/3E 2008"),
+]
+
+RENEWABLE_POTENTIAL = [
+    ("HTI", "hydro", 60.0, 154.0, None, None, None, "54 MW Peligre plant", "BME"),
+    ("HTI", "solar", None, None, "irradiation_range", "5-7", "kWh/m2/day", "5-7 kWh/m2/day, up to 8 in some regions", "BME"),
+    ("HTI", "wind", None, 50.0, None, None, None, "7-9 m/s at 80m; zones: West, South-West, North-West", "BME/3E 2008"),
+    ("HTI", "solar", None, None, "ndc_target_pct", 7.5, "percent", "47% renewable by 2030 target", "NDC"),
+    ("HTI", "hydro", None, None, "ndc_target_pct", 24.5, "percent", "47% renewable by 2030 target", "NDC"),
+    ("HTI", "wind", None, None, "ndc_target_pct", 9.4, "percent", "47% renewable by 2030 target", "NDC"),
+    ("HTI", "biomass", None, None, "ndc_target_pct", 5.6, "percent", "47% renewable by 2030 target", "NDC"),
+]
+
 PLANS = [
     ("PSDH - Haiti emergent en 2030", "Government of Haiti", "2030", 2012, "Foundational national development", None, "Led by MPCE"),
     ("Medium-Term Recovery and Development Plan", "IDB (coordinating)", "2025-2030", 2025, "Recovery & private-sector growth", None, "3 pillars: economic recovery, basic services, institutions/security"),
@@ -337,6 +371,40 @@ def seed_plans(db):
     print(f"  plan_registry: seeded {len(PLANS)} rows")
 
 
+def seed_energy_access(db):
+    cur = db.cursor()
+    for (code, year, rate, rural, pop, status, src) in ENERGY_ACCESS:
+        pid = cur.execute("SELECT period_id FROM time_periods WHERE year=? AND period_type='year'", (year,)).fetchone()
+        if not pid: continue
+        cur.execute("""INSERT OR IGNORE INTO electricity_access
+            (location_id, period_id, access_rate_pct, rural_access_pct, population_without_access, grid_status, source)
+            VALUES (?, ?, ?, ?, ?, ?, ?)""",
+            (_lid(cur, code), pid[0], rate, rural, pop, status, src))
+    db.commit()
+    print(f"  electricity_access: seeded {len(ENERGY_ACCESS)} rows")
+
+def seed_energy_production(db):
+    cur = db.cursor()
+    for (year, etype, metric, val, unit, src) in ENERGY_PRODUCTION:
+        pid = cur.execute("SELECT period_id FROM time_periods WHERE year=? AND period_type='year'", (year,)).fetchone()
+        if not pid: continue
+        cur.execute("""INSERT OR IGNORE INTO energy_production_consumption
+            (period_id, energy_type, metric, value, unit, source)
+            VALUES (?, ?, ?, ?, ?, ?)""",
+            (pid[0], etype, metric, val, unit, src))
+    db.commit()
+    print(f"  energy_production_consumption: seeded {len(ENERGY_PRODUCTION)} rows")
+
+def seed_renewable(db):
+    cur = db.cursor()
+    for (code, rtype, exploited, unexploited, mname, mval, munit, notes, src) in RENEWABLE_POTENTIAL:
+        cur.execute("""INSERT OR IGNORE INTO renewable_potential
+            (location_id, resource_type, exploited_capacity_mw, unexploited_potential_mw, metric_name, metric_value, metric_unit, notes, source)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+            (_lid(cur, code), rtype, exploited, unexploited, mname, mval, munit, notes, src))
+    db.commit()
+    print(f"  renewable_potential: seeded {len(RENEWABLE_POTENTIAL)} rows")
+
 def seed_all(db):
     seed_locations(db)
     seed_time_periods(db)
@@ -352,3 +420,6 @@ def seed_all(db):
     seed_bilateral(db)
     seed_production(db)
     seed_plans(db)
+    seed_energy_access(db)
+    seed_energy_production(db)
+    seed_renewable(db)

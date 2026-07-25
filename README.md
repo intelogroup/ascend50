@@ -19,11 +19,11 @@ python report.py   # generates report.html
 |--------|------|-----------|------|
 | World Bank API | Live | 11 indicators (GDP, inflation, population, trade, health, internet, forest, unemployment, poverty, electricity) | 257 |
 | HDX HAPI v2 | Live | baseline-population, food-security, refugees, humanitarian-needs, rainfall, operational-presence, poverty-rate, conflict-events, funding | ~180 |
-| Static reference | Seeded | Water quality, forest cover, mineral resources, geothermal springs, geology, DEM, satellite, macroeconomic, trade, bilateral trade DR, local production, strategic plans | 138 |
+| Static reference | Seeded | Water quality, forest cover, mineral resources, geothermal springs, geology, DEM, satellite, macroeconomic, trade, bilateral trade DR, local production, strategic plans, energy access, energy production, renewable potential | 162 |
 
-## Schema — 19 Tables
+## Schema — 22 Tables
 
-population_data, food_security_data, water_quality_data, health_humanitarian_data, economic_data, hazards_data, forest_data, mineral_resources, geothermal_data, geological_data, elevation_data, satellite_imagery, macroeconomic_data, trade_data, bilateral_trade_dr, local_production, plan_registry, locations, time_periods
+population_data, food_security_data, water_quality_data, health_humanitarian_data, economic_data, hazards_data, forest_data, mineral_resources, geothermal_data, geological_data, elevation_data, satellite_imagery, macroeconomic_data, trade_data, bilateral_trade_dr, local_production, plan_registry, electricity_access, energy_production_consumption, renewable_potential, locations, time_periods
 
 ## Files
 

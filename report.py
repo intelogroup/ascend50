@@ -62,6 +62,7 @@ def main():
         "geological_data","elevation_data","satellite_imagery",
         "macroeconomic_data","trade_data","bilateral_trade_dr",
         "local_production","plan_registry",
+        "electricity_access","energy_production_consumption","renewable_potential",
     ]
     total_rows = 0
     trows = []
@@ -109,6 +110,18 @@ def main():
         WHERE hh.indicator_type='funding'
         GROUP BY tp.year ORDER BY tp.year DESC LIMIT 10
     """))
+
+    content += section("Electricity Access", ["Year","Access %","Rural %","Without Access","Status"], db.execute("SELECT tp.year,ea.access_rate_pct,ea.rural_access_pct,ea.population_without_access,ea.grid_status FROM electricity_access ea JOIN time_periods tp ON ea.period_id=tp.period_id WHERE ea.location_id=1 ORDER BY tp.year DESC"))
+
+    content += section("Energy Production/Consumption", ["Year","Type","Metric","Value","Unit"], db.execute("SELECT tp.year,ep.energy_type,ep.metric,ep.value,ep.unit FROM energy_production_consumption ep JOIN time_periods tp ON ep.period_id=tp.period_id ORDER BY tp.year DESC,ep.energy_type"))
+
+    content += section("Renewable Potential", ["Type","Exploited MW","Unexploited MW","Notes"], db.execute("SELECT resource_type,exploited_capacity_mw,unexploited_potential_mw,notes FROM renewable_potential WHERE location_id=1 AND exploited_capacity_mw IS NOT NULL ORDER BY resource_type"))
+
+    ndc = db.execute("SELECT resource_type,metric_value FROM renewable_potential WHERE metric_name='ndc_target_pct' AND location_id=1 ORDER BY resource_type").fetchall()
+    if ndc:
+        content += bar_chart("NDC 2030 Renewable Targets (%)", [r[0] for r in ndc], [r[1] for r in ndc])
+
+    content += section("NDC 2030 Targets", ["Type","Target %","Target"], db.execute("SELECT resource_type,metric_value||'%',metric_unit FROM renewable_potential WHERE metric_name='ndc_target_pct' AND location_id=1 ORDER BY resource_type"))
 
     content += section("Strategic Plans", ["Plan","Lead","Timeframe","Year"], db.execute("SELECT plan_name,lead_org,timeframe,year_published FROM plan_registry ORDER BY year_published"))
 
