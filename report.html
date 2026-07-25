@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Haiti Data Hub Report</title>
+<style>
+body{font:14px/1.5 system-ui,sans-serif;max-width:960px;margin:auto;padding:20px;color:#222;background:#f8f9fa}
+h1{font-size:24px} h2{font-size:18px;border-bottom:2px solid #ddd;padding-bottom:4px;margin-top:28px}
+table{border-collapse:collapse;width:100%;margin:8px 0 16px;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.1)}
+th{background:#eee;text-align:left;padding:6px 8px;font-weight:600;font-size:13px}
+td{padding:4px 8px;border-top:1px solid #eee;font-size:13px;vertical-align:top}
+.overview td{border:none}
+.bar{display:inline-block;height:12px;background:#4a7;border-radius:2px;min-width:2px}
+.summary{color:#666;font-size:13px;margin-bottom:20px}
+</style></head>
+<body>
+<h1>Haiti Data Hub &mdash; Report</h1>
+<p class=summary>Generated: 2026-07-25 16:18 &middot; 573 rows across 19 tables &middot; DB: 212 KB</p>
+<table class=overview><tr><th>Table</th><th>Rows</th></tr>
+<tr><td>locations</td><td>13</td></tr>
+<tr><td>time_periods</td><td>31</td></tr>
+<tr><td>population_data</td><td>36</td></tr>
+<tr><td>food_security_data</td><td>48</td></tr>
+<tr><td>water_quality_data</td><td>6</td></tr>
+<tr><td>health_humanitarian_data</td><td>69</td></tr>
+<tr><td>economic_data</td><td>257</td></tr>
+<tr><td>hazards_data</td><td>22</td></tr>
+<tr><td>forest_data</td><td>5</td></tr>
+<tr><td>mineral_resources</td><td>8</td></tr>
+<tr><td>geothermal_data</td><td>5</td></tr>
+<tr><td>geological_data</td><td>3</td></tr>
+<tr><td>elevation_data</td><td>3</td></tr>
+<tr><td>satellite_imagery</td><td>4</td></tr>
+<tr><td>macroeconomic_data</td><td>10</td></tr>
+<tr><td>trade_data</td><td>22</td></tr>
+<tr><td>bilateral_trade_dr</td><td>10</td></tr>
+<tr><td>local_production</td><td>11</td></tr>
+<tr><td>plan_registry</td><td>10</td></tr>
+</table>
+<h2>Departments <span style=font-weight:400;font-size:13px;color:#888>(10 rows)</span></h2>
+<table><tr><th>Code</th><th>Name</th></tr>
+<tr><td>HT01</td><td>Artibonite</td></tr>
+<tr><td>HT02</td><td>Centre</td></tr>
+<tr><td>HT03</td><td>Grand&#x27;Anse</td></tr>
+<tr><td>HT04</td><td>Nippes</td></tr>
+<tr><td>HT05</td><td>Nord</td></tr>
+<tr><td>HT06</td><td>Nord-Est</td></tr>
+<tr><td>HT07</td><td>Nord-Ouest</td></tr>
+<tr><td>HT08</td><td>Ouest</td></tr>
+<tr><td>HT09</td><td>Sud</td></tr>
+<tr><td>HT10</td><td>Sud-Est</td></tr>
+</table>
+<h2>Recent GDP Growth <span style=font-weight:400;font-size:13px;color:#888>(10 rows)</span></h2>
+<table><tr><th>Year</th><th>GDP Growth %</th></tr>
+<tr><td>2025</td><td>-2.71</td></tr>
+<tr><td>2024</td><td>-4.18</td></tr>
+<tr><td>2023</td><td>-1.86</td></tr>
+<tr><td>2022</td><td>-1.68</td></tr>
+<tr><td>2021</td><td>-1.8</td></tr>
+<tr><td>2020</td><td>-3.31</td></tr>
+<tr><td>2019</td><td>-1.72</td></tr>
+<tr><td>2018</td><td>1.67</td></tr>
+<tr><td>2017</td><td>2.51</td></tr>
+<tr><td>2016</td><td>1.81</td></tr>
+</table>
+<h3>GDP Growth Trend</h3><div style=font-size:13px>
+<div style=margin:2px 0><span style=display:inline-block;width:120px>2000</span><span class=bar style=width:44px;background:#4a7></span> 0.87</div>
+<div style=margin:2px 0><span style=display:inline-block;width:120px>2001</span><span class=bar style=width:17px;background:#c44></span> -0.34</div>
+<div style=margin:2px 0><span style=display:inline-block;width:120px>2002</span><span class=bar style=width:53px;background:#4a7></span> 1.05</div>
+<div style=margin:2px 0><span style=display:inline-block;width:120px>2003</span><span class=bar style=width:177px;background:#4a7></span> 3.48</div>
+<div style=margin:2px 0><span style=display:inline-block;width:120px>2004</span><span class=bar style=width:67px;background:#c44></span> -1.32</div>
+<div style=margin:2px 0><span style=display:inline-block;width:120px>2005</span><span class=bar style=width:156px;background:#4a7></span> 3.07</div>
+<div style=margin:2px 0><span style=display:inline-block;width:120px>2006</span><span class=bar style=width:90px;background:#4a7></span> 1.77</div>
+<div style=margin:2px 0><span style=display:inline-block;width:120px>2007</span><span class=bar style=width:239px;background:#4a7></span> 4.71</div>
+<div style=margin:2px 0><span style=display:inline-block;width:120px>2008</span><span class=bar style=width:135px;background:#4a7></span> 2.66</div>
+<div style=margin:2px 0><span style=display:inline-block;width:120px>2009</span><span class=bar style=width:300px;background:#4a7></span> 5.89</div>
+<div style=margin:2px 0><span style=display:inline-block;width:120px>2010</span><span class=bar style=width:287px;background:#c44></span> -5.65</div>
+<div style=margin:2px 0><span style=display:inline-block;width:120px>2011</span><span class=bar style=width:259px;background:#4a7></span> 5.1</div>
+<div style=margin:2px 0><span style=display:inline-block;width:120px>2012</span><span class=bar style=width:25px;background:#4a7></span> 0.5</div>
+<div style=margin:2px 0><span style=display:inline-block;width:120px>2013</span><span class=bar style=width:220px;background:#4a7></span> 4.32</div>
+<div style=margin:2px 0><span style=display:inline-block;width:120px>2014</span><span class=bar style=width:147px;background:#4a7></span> 2.89</div>
+<div style=margin:2px 0><span style=display:inline-block;width:120px>2015</span><span class=bar style=width:71px;background:#4a7></span> 1.4</div>
+<div style=margin:2px 0><span style=display:inline-block;width:120px>2016</span><span class=bar style=width:92px;background:#4a7></span> 1.81</div>
+<div style=margin:2px 0><span style=display:inline-block;width:120px>2017</span><span class=bar style=width:127px;background:#4a7></span> 2.51</div>
+<div style=margin:2px 0><span style=display:inline-block;width:120px>2018</span><span class=bar style=width:85px;background:#4a7></span> 1.67</div>
+<div style=margin:2px 0><span style=display:inline-block;width:120px>2019</span><span class=bar style=width:87px;background:#c44></span> -1.72</div>
+<div style=margin:2px 0><span style=display:inline-block;width:120px>2020</span><span class=bar style=width:168px;background:#c44></span> -3.31</div>
+<div style=margin:2px 0><span style=display:inline-block;width:120px>2021</span><span class=bar style=width:91px;background:#c44></span> -1.8</div>
+<div style=margin:2px 0><span style=display:inline-block;width:120px>2022</span><span class=bar style=width:85px;background:#c44></span> -1.68</div>
+<div style=margin:2px 0><span style=display:inline-block;width:120px>2023</span><span class=bar style=width:94px;background:#c44></span> -1.86</div>
+<div style=margin:2px 0><span style=display:inline-block;width:120px>2024</span><span class=bar style=width:212px;background:#c44></span> -4.18</div>
+<div style=margin:2px 0><span style=display:inline-block;width:120px>2025</span><span class=bar style=width:138px;background:#c44></span> -2.71</div>
+</div>
+<h2>Population by Dept <span style=font-weight:400;font-size:13px;color:#888>(36 rows)</span></h2>
+<table><tr><th>Dept</th><th>Population</th><th>Age Range</th></tr>
+<tr><td>Artibonite</td><td>27489.0</td><td>0-4</td></tr>
+<tr><td>Artibonite</td><td>37658.0</td><td>10-14</td></tr>
+<tr><td>Artibonite</td><td>44726.0</td><td>15-19</td></tr>
+<tr><td>Artibonite</td><td>51668.0</td><td>20-24</td></tr>
+<tr><td>Artibonite</td><td>42576.0</td><td>25-29</td></tr>
+<tr><td>Artibonite</td><td>44960.0</td><td>30-34</td></tr>
+<tr><td>Artibonite</td><td>42513.0</td><td>35-39</td></tr>
+<tr><td>Artibonite</td><td>42177.0</td><td>40-44</td></tr>
+<tr><td>Artibonite</td><td>36435.0</td><td>45-49</td></tr>
+<tr><td>Artibonite</td><td>35684.0</td><td>5-9</td></tr>
+<tr><td>Artibonite</td><td>26948.0</td><td>50-54</td></tr>
+<tr><td>Artibonite</td><td>19533.0</td><td>55-59</td></tr>
+<tr><td>Artibonite</td><td>13769.0</td><td>60-64</td></tr>
+<tr><td>Artibonite</td><td>9882.0</td><td>65-69</td></tr>
+<tr><td>Artibonite</td><td>4394.0</td><td>70-74</td></tr>
+<tr><td>Artibonite</td><td>2299.0</td><td>75-79</td></tr>
+<tr><td>Artibonite</td><td>1213.0</td><td>80+</td></tr>
+<tr><td>Artibonite</td><td>483924.0</td><td>all</td></tr>
+<tr><td>Ouest</td><td>27489.0</td><td>0-4</td></tr>
+<tr><td>Ouest</td><td>37658.0</td><td>10-14</td></tr>
+<tr><td>Ouest</td><td>44726.0</td><td>15-19</td></tr>
+<tr><td>Ouest</td><td>51668.0</td><td>20-24</td></tr>
+<tr><td>Ouest</td><td>42576.0</td><td>25-29</td></tr>
+<tr><td>Ouest</td><td>44960.0</td><td>30-34</td></tr>
+<tr><td>Ouest</td><td>42513.0</td><td>35-39</td></tr>
+<tr><td>Ouest</td><td>42177.0</td><td>40-44</td></tr>
+<tr><td>Ouest</td><td>36435.0</td><td>45-49</td></tr>
+<tr><td>Ouest</td><td>35684.0</td><td>5-9</td></tr>
+<tr><td>Ouest</td><td>26948.0</td><td>50-54</td></tr>
+<tr><td>Ouest</td><td>19533.0</td><td>55-59</td></tr>
+<tr><td>Ouest</td><td>13769.0</td><td>60-64</td></tr>
+<tr><td>Ouest</td><td>9882.0</td><td>65-69</td></tr>
+<tr><td>Ouest</td><td>4394.0</td><td>70-74</td></tr>
+<tr><td>Ouest</td><td>2299.0</td><td>75-79</td></tr>
+<tr><td>Ouest</td><td>1213.0</td><td>80+</td></tr>
+<tr><td>Ouest</td><td>483924.0</td><td>all</td></tr>
+</table>
+<h2>Food Security (IPC Phase 1) <span style=font-weight:400;font-size:13px;color:#888>(8 rows)</span></h2>
+<table><tr><th>Dept</th><th>Pop in Phase 1</th><th>Pct</th></tr>
+<tr><td>Grand&#x27;Anse</td><td>1429402.0</td><td>30.0</td></tr>
+<tr><td>Centre</td><td>915253.0</td><td>27.8</td></tr>
+<tr><td>Artibonite</td><td>1871429.0</td><td>27.4</td></tr>
+<tr><td>Nord-Ouest</td><td>1170815.0</td><td>27.0</td></tr>
+<tr><td>Nord-Est</td><td>1017244.0</td><td>26.2</td></tr>
+<tr><td>Nord</td><td>2050909.0</td><td>25.2</td></tr>
+<tr><td>Nippes</td><td>527661.0</td><td>24.4</td></tr>
+<tr><td>Ouest</td><td>527018.0</td><td>20.4</td></tr>
+</table>
+<h2>Conflict Events <span style=font-weight:400;font-size:13px;color:#888>(18 rows)</span></h2>
+<table><tr><th>Dept</th><th>Admin2</th><th>Severity</th><th>Events</th><th>Year</th></tr>
+<tr><td>Artibonite</td><td></td><td>civilian_targeting fatalities=50</td><td>27.0</td><td>2026</td></tr>
+<tr><td>Ouest</td><td>Port-au-Prince</td><td>civilian_targeting fatalities=50</td><td>27.0</td><td>2026</td></tr>
+<tr><td>Artibonite</td><td></td><td>civilian_targeting fatalities=237</td><td>75.0</td><td>2025</td></tr>
+<tr><td>Ouest</td><td>Port-au-Prince</td><td>civilian_targeting fatalities=237</td><td>75.0</td><td>2025</td></tr>
+<tr><td>Artibonite</td><td></td><td>civilian_targeting fatalities=124</td><td>43.0</td><td>2024</td></tr>
+<tr><td>Ouest</td><td>Port-au-Prince</td><td>civilian_targeting fatalities=124</td><td>43.0</td><td>2024</td></tr>
+<tr><td>Artibonite</td><td></td><td>civilian_targeting fatalities=13</td><td>23.0</td><td>2023</td></tr>
+<tr><td>Ouest</td><td>Port-au-Prince</td><td>civilian_targeting fatalities=13</td><td>23.0</td><td>2023</td></tr>
+<tr><td>Artibonite</td><td></td><td>civilian_targeting fatalities=30</td><td>24.0</td><td>2022</td></tr>
+<tr><td>Ouest</td><td>Port-au-Prince</td><td>civilian_targeting fatalities=30</td><td>24.0</td><td>2022</td></tr>
+<tr><td>Artibonite</td><td></td><td>civilian_targeting fatalities=4</td><td>27.0</td><td>2021</td></tr>
+<tr><td>Ouest</td><td>Port-au-Prince</td><td>civilian_targeting fatalities=4</td><td>27.0</td><td>2021</td></tr>
+<tr><td>Artibonite</td><td></td><td>civilian_targeting fatalities=7</td><td>12.0</td><td>2020</td></tr>
+<tr><td>Ouest</td><td>Port-au-Prince</td><td>civilian_targeting fatalities=7</td><td>12.0</td><td>2020</td></tr>
+<tr><td>Artibonite</td><td></td><td>civilian_targeting fatalities=3</td><td>3.0</td><td>2019</td></tr>
+<tr><td>Ouest</td><td>Port-au-Prince</td><td>civilian_targeting fatalities=3</td><td>3.0</td><td>2019</td></tr>
+<tr><td>Artibonite</td><td></td><td>civilian_targeting fatalities=0</td><td>0.0</td><td>2018</td></tr>
+<tr><td>Ouest</td><td>Port-au-Prince</td><td>civilian_targeting fatalities=0</td><td>0.0</td><td>2018</td></tr>
+</table>
+<h2>Poverty Headcount (%) <span style=font-weight:400;font-size:13px;color:#888>(8 rows)</span></h2>
+<table><tr><th>Dept</th><th>2012</th><th>2016</th></tr>
+<tr><td>Centre</td><td>61.9</td><td>46.5</td></tr>
+<tr><td>Grand&#x27;Anse</td><td>49.2</td><td>39.3</td></tr>
+<tr><td>Haiti</td><td>48.4</td><td>39.9</td></tr>
+<tr><td>Nippes</td><td>59.7</td><td>40.6</td></tr>
+<tr><td>Nord</td><td>59.1</td><td>50.1</td></tr>
+<tr><td>Nord-Est</td><td>72.5</td><td>56.1</td></tr>
+<tr><td>Ouest</td><td>72.7</td><td>58.5</td></tr>
+<tr><td>Sud-Est</td><td>53.1</td><td>40.2</td></tr>
+</table>
+<h2>Humanitarian Funding <span style=font-weight:400;font-size:13px;color:#888>(10 rows)</span></h2>
+<table><tr><th>Year</th><th>Funding USD</th><th>Details</th></tr>
+<tr><td>2029</td><td>108557.0</td><td>appeal=Not specified requirements=None funding_pct=None</td></tr>
+<tr><td>2028</td><td>3276910.0</td><td>appeal=Not specified requirements=None funding_pct=None</td></tr>
+<tr><td>2027</td><td>10541304.0</td><td>appeal=Not specified requirements=None funding_pct=None</td></tr>
+<tr><td>2026</td><td>333502342.0</td><td>appeal=HHTI26 requirements=880327426.0 funding_pct=38.0</td></tr>
+<tr><td>2025</td><td>242636055.0</td><td>appeal=HHTI25 requirements=908159989.0 funding_pct=27.0</td></tr>
+<tr><td>2024</td><td>300419527.0</td><td>appeal=HHTI24 requirements=673767352.0 funding_pct=45.0</td></tr>
+<tr><td>2023</td><td>247971799.0</td><td>appeal=HHTI23 requirements=719857713.0 funding_pct=34.0</td></tr>
+<tr><td>2022</td><td>14400156.0</td><td>appeal=FHTI2223 requirements=145600234.0 funding_pct=10.0</td></tr>
+<tr><td>2021</td><td>77677979.0</td><td>appeal=FHTI2122 requirements=187295000.0 funding_pct=41.0</td></tr>
+<tr><td>2020</td><td>153296222.0</td><td>appeal=HHTI20 requirements=471993035.0 funding_pct=32.0</td></tr>
+</table>
+<h2>Strategic Plans <span style=font-weight:400;font-size:13px;color:#888>(10 rows)</span></h2>
+<table><tr><th>Plan</th><th>Lead</th><th>Timeframe</th><th>Year</th></tr>
+<tr><td>Vision 2050 Grand Nord</td><td>Regional/Independent</td><td>2050</td><td></td></tr>
+<tr><td>Haiti 2050: A Vision for Sustainable Prosperity</td><td>Independent</td><td>2050</td><td></td></tr>
+<tr><td>PSDH - Haiti emergent en 2030</td><td>Government of Haiti</td><td>2030</td><td>2012</td></tr>
+<tr><td>National Biodiversity Strategy and Action Plan</td><td>Government of Haiti</td><td>2020-2030</td><td>2020</td></tr>
+<tr><td>EU Strategy for Haiti</td><td>European Union</td><td>2021-2027</td><td>2021</td></tr>
+<tr><td>National Adaptation Plan (PNA)</td><td>Government of Haiti</td><td>2022-2030</td><td>2022</td></tr>
+<tr><td>UNSDCF</td><td>United Nations</td><td>2023-2027</td><td>2023</td></tr>
+<tr><td>Medium-Term Recovery and Development Plan</td><td>IDB (coordinating)</td><td>2025-2030</td><td>2025</td></tr>
+<tr><td>World Bank Group Country Partnership Framework</td><td>World Bank</td><td>2025-2029</td><td>2025</td></tr>
+<tr><td>National Environmental Action Plan (PNAE)</td><td>Ministry of Environment</td><td>2025-2050</td><td>2025</td></tr>
+</table>
+
+</body></html>
