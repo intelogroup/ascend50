@@ -64,6 +64,7 @@ def main():
         "local_production","plan_registry",
         "electricity_access","energy_production_consumption","renewable_potential",
         "social_institutional_data",
+        "displacement_data",
     ]
     total_rows = 0
     trows = []
@@ -128,6 +129,10 @@ def main():
         rows = db.execute("SELECT sid.indicator,sid.value,sid.unit,tp.year,sid.source FROM social_institutional_data sid JOIN time_periods tp ON sid.period_id=tp.period_id WHERE sid.domain=? AND sid.location_id=1 ORDER BY tp.year DESC", (dom,)).fetchall()
         if rows:
             content += section(f"{dom.title()} Indicators", ["Indicator","Value","Unit","Year","Source"], rows)
+
+    content += section("Health Indicators (WHO)", ["Indicator","Value","Unit","Year","Sex"], db.execute("SELECT sid.indicator,ROUND(sid.value,2),sid.unit,tp.year,sid.disaggregation FROM social_institutional_data sid JOIN time_periods tp ON sid.period_id=tp.period_id WHERE sid.domain='health' AND sid.location_id=1 ORDER BY sid.indicator,tp.year DESC LIMIT 40"))
+
+    content += section("Displacement Data (IOM)", ["Year","Total IDPs","Male","Female","Reason","Round"], db.execute("SELECT tp.year,dd.total_idps,dd.male_idps,dd.female_idps,dd.displacement_reason,dd.round_number FROM displacement_data dd JOIN time_periods tp ON dd.period_id=tp.period_id ORDER BY tp.year DESC,dd.round_number DESC LIMIT 10"))
 
     content += section("Strategic Plans", ["Plan","Lead","Timeframe","Year"], db.execute("SELECT plan_name,lead_org,timeframe,year_published FROM plan_registry ORDER BY year_published"))
 

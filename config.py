@@ -27,4 +27,7 @@ WB_INDICATORS = {
     "IQ.CPA.BREG.XQ": "CPIA business regulatory quality",
     "BX.TRF.PWKR.CD.DT": "Personal remittances received (US$)",
     "BX.TRF.PWKR.DT.GD.ZS": "Personal remittances (% of GDP)",
+    "ER.H2O.FWTL.ZS": "Annual freshwater withdrawals (% of internal resources)",
+    "EG.ELC.RNWX.ZS": "Electricity from renewables excl. hydro (% of total)",
+    "EN.GHG.CO2.PC.CE.AR5": "CO2 emissions per capita (t CO2e/capita)",
 }

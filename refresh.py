@@ -5,6 +5,8 @@ from schema import create_schema
 from seed_static import seed_all
 from fetch_wb import fetch_worldbank
 from fetch_hdx import fetch_hdx
+from fetch_who import fetch_who
+from fetch_iom import fetch_iom
 
 
 def print_summary(db):
@@ -16,7 +18,7 @@ def print_summary(db):
         "macroeconomic_data", "trade_data", "bilateral_trade_dr",
         "local_production", "plan_registry",
         "electricity_access", "energy_production_consumption", "renewable_potential",
-        "social_institutional_data",
+        "social_institutional_data", "displacement_data",
     ]
     print("\n=== DB Summary ===")
     total = 0
@@ -46,6 +48,8 @@ def main():
 
     fetch_worldbank(db)
     fetch_hdx(db)
+    fetch_who(db)
+    fetch_iom(db)
 
     print_summary(db)
     db.close()

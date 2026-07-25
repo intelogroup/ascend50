@@ -354,6 +354,24 @@ CREATE TABLE IF NOT EXISTS social_institutional_data (
 CREATE UNIQUE INDEX IF NOT EXISTS idx_social_uniq ON social_institutional_data(
     location_id, period_id, domain, indicator, source
 );
+
+CREATE TABLE IF NOT EXISTS displacement_data (
+    record_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    location_id INTEGER REFERENCES locations(location_id),
+    period_id INTEGER REFERENCES time_periods(period_id),
+    total_idps INTEGER,
+    male_idps INTEGER,
+    female_idps INTEGER,
+    displacement_reason TEXT,
+    origin_location TEXT,
+    round_number INTEGER,
+    reporting_date TEXT,
+    source TEXT NOT NULL
+);
+
+CREATE UNIQUE INDEX IF NOT EXISTS idx_displace_uniq ON displacement_data(
+    location_id, period_id, COALESCE(displacement_reason,'')
+);
 """
 
 

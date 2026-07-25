@@ -161,7 +161,25 @@ def main():
                sid.source, tp.year
         FROM social_institutional_data sid
         JOIN time_periods tp ON sid.period_id = tp.period_id
+        WHERE sid.domain != 'health'
         ORDER BY sid.domain, sid.indicator, tp.year DESC
+    """)
+
+    run_query(db, "Health Indicators (WHO GHO)", """
+        SELECT sid.indicator, ROUND(sid.value,2) AS val, sid.unit,
+               tp.year, sid.disaggregation
+        FROM social_institutional_data sid
+        JOIN time_periods tp ON sid.period_id = tp.period_id
+        WHERE sid.domain='health'
+        ORDER BY sid.indicator, tp.year DESC
+    """)
+
+    run_query(db, "Displacement Data (IOM DTM)", """
+        SELECT tp.year, total_idps, male_idps, female_idps,
+               displacement_reason, round_number
+        FROM displacement_data dd
+        JOIN time_periods tp ON dd.period_id = tp.period_id
+        ORDER BY tp.year DESC, round_number DESC
     """)
 
     run_query(db, "NDC 2030 Targets", """
