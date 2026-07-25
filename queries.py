@@ -156,6 +156,14 @@ def main():
         ORDER BY resource_type
     """)
 
+    run_query(db, "Social & Institutional (by domain)", """
+        SELECT sid.domain, sid.indicator, sid.value, sid.unit,
+               sid.source, tp.year
+        FROM social_institutional_data sid
+        JOIN time_periods tp ON sid.period_id = tp.period_id
+        ORDER BY sid.domain, sid.indicator, tp.year DESC
+    """)
+
     run_query(db, "NDC 2030 Targets", """
         SELECT resource_type, metric_value, metric_unit, notes
         FROM renewable_potential

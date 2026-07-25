@@ -185,6 +185,44 @@ RENEWABLE_POTENTIAL = [
     ("HTI", "biomass", None, None, "ndc_target_pct", 5.6, "percent", "47% renewable by 2030 target", "NDC"),
 ]
 
+SOCIO_INSTITUTIONAL = [
+    # governance
+    (2024, "HTI", "governance", "judiciary_score", 1.0, "/4", "political_rights_civil_liberties", "Freedom House"),
+    (2024, "HTI", "governance", "corruption_perception_index", 17.0, "score_0-100", "CPI_2024", "Transparency International"),
+    (2021, "HTI", "governance", "WGI_control_of_corruption", 4.4, "percentile_0-100", "Estimate=-0.99", "WGI"),
+    (2021, "HTI", "governance", "WGI_government_effectiveness", 2.4, "percentile_0-100", "Estimate=-1.18", "WGI"),
+    (2021, "HTI", "governance", "WGI_rule_of_law", 5.3, "percentile_0-100", "Estimate=-0.92", "WGI"),
+    # justice
+    (2024, "HTI", "justice", "pretrial_detainees_pct", 84.0, "percent", "of_all_detainees", "World Prison Brief"),
+    (2024, "HTI", "justice", "judicial_independence_score", 1.0, "/4", "Freedom_House_rating", "Freedom House"),
+    (2023, "HTI", "justice", "homicide_rate_per_100k", 13.3, "per_100k", "UNODC", "UNDP"),
+    # security
+    (2026, "HTI", "security", "fatalities_mar2025_jan2026", 5519, "killed", "BINHU_verified", "BINUH/OHCHR"),
+    (2025, "HTI", "security", "internally_displaced", 1.0e6, "people", "IOM_DTM", "IOM"),
+    # public finance
+    (2025, "HTI", "public_finance", "gov_revenue_pct_gdp", 4.8, "percent", "MEF", "MEF/World Bank"),
+    (2025, "HTI", "public_finance", "budget_execution_rate", 60.0, "percent", "estimated", "MEF"),
+    # education
+    (2023, "HTI", "education", "adult_literacy_rate", 50.0, "percent", "roughly_half_adults_illiterate", "UNESCO/UIS"),
+    (2023, "HTI", "education", "primary_completion_rate", 58.0, "percent", "estimated", "World Bank"),
+    (2023, "HTI", "education", "out_of_school_children", 500.0e3, "children", "estimated", "UNESCO/UIS"),
+    # diaspora
+    (2024, "HTI", "diaspora", "remittances_total_usd", 3.2e9, "USD", "annual_official", "World Bank/BRH"),
+    (2024, "HTI", "diaspora", "remittances_pct_gdp", 20.0, "percent", "over_20pct_of_GDP", "World Bank/BRH"),
+    # telecom
+    (2024, "HTI", "telecom", "internet_penetration", 39.3, "percent", "population", "Internet Society Pulse"),
+    (2024, "HTI", "telecom", "4g_coverage_pct", 65.0, "percent", "population", "Internet Society Pulse"),
+    (2024, "HTI", "telecom", "5g_coverage_pct", 0.5, "percent", "less_than_1pct", "Internet Society Pulse"),
+    # transport
+    (2024, "HTI", "transport", "port_capacity_tons", 750.0e3, "tons_per_year", "Port-au-Prince_main", "Logistics Cluster/WFP"),
+    (2024, "HTI", "transport", "paved_roads_pct", 25.0, "percent", "estimated", "MTPTC"),
+    (2024, "HTI", "transport", "airports_international", 2, "airports", "PaP+Cap-Haitien", "Logistics Cluster/WFP"),
+    # climate
+    (2024, "HTI", "climate", "Climate_Health_Risk_Index", 8.7, "score_0-10", "CHRI_2024", "WHO/World Bank"),
+    (2023, "HTI", "climate", "ghg_emissions_mt_co2e", 12.0, "MT_CO2e", "estimated", "FAO/World Bank"),
+    (2024, "HTI", "climate", "flood_risk_population_pct", 35.0, "percent", "estimated", "Gade Lapli/UNDP"),
+]
+
 PLANS = [
     ("PSDH - Haiti emergent en 2030", "Government of Haiti", "2030", 2012, "Foundational national development", None, "Led by MPCE"),
     ("Medium-Term Recovery and Development Plan", "IDB (coordinating)", "2025-2030", 2025, "Recovery & private-sector growth", None, "3 pillars: economic recovery, basic services, institutions/security"),
@@ -405,6 +443,18 @@ def seed_renewable(db):
     db.commit()
     print(f"  renewable_potential: seeded {len(RENEWABLE_POTENTIAL)} rows")
 
+def seed_social_institutional(db):
+    cur = db.cursor()
+    for (year, code, domain, indicator, val, unit, disag, src) in SOCIO_INSTITUTIONAL:
+        pid = cur.execute("SELECT period_id FROM time_periods WHERE year=? AND period_type='year'", (year,)).fetchone()
+        if not pid: continue
+        cur.execute("""INSERT OR IGNORE INTO social_institutional_data
+            (location_id, period_id, domain, indicator, value, unit, disaggregation, source)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
+            (_lid(cur, code), pid[0], domain, indicator, val, unit, disag, src))
+    db.commit()
+    print(f"  social_institutional_data: seeded {len(SOCIO_INSTITUTIONAL)} rows")
+
 def seed_all(db):
     seed_locations(db)
     seed_time_periods(db)
@@ -423,3 +473,4 @@ def seed_all(db):
     seed_energy_access(db)
     seed_energy_production(db)
     seed_renewable(db)
+    seed_social_institutional(db)

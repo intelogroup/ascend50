@@ -338,6 +338,22 @@ CREATE TABLE IF NOT EXISTS renewable_potential (
 CREATE UNIQUE INDEX IF NOT EXISTS idx_renew_uniq ON renewable_potential(
     location_id, resource_type, source
 );
+
+CREATE TABLE IF NOT EXISTS social_institutional_data (
+    record_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    location_id INTEGER REFERENCES locations(location_id),
+    period_id INTEGER REFERENCES time_periods(period_id),
+    domain TEXT NOT NULL,
+    indicator TEXT NOT NULL,
+    value REAL,
+    unit TEXT,
+    disaggregation TEXT,
+    source TEXT NOT NULL
+);
+
+CREATE UNIQUE INDEX IF NOT EXISTS idx_social_uniq ON social_institutional_data(
+    location_id, period_id, domain, indicator, source
+);
 """
 
 

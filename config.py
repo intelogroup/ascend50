@@ -23,4 +23,8 @@ WB_INDICATORS = {
     "SI.POV.NAHC": "Poverty headcount ratio (% of population)",
     "IT.NET.USER.ZS": "Internet users (% of population)",
     "AG.LND.FRST.ZS": "Forest area (% of land area)",
+    "IQ.CPA.TRAN.XQ": "CPIA transparency rating",
+    "IQ.CPA.BREG.XQ": "CPIA business regulatory quality",
+    "BX.TRF.PWKR.CD.DT": "Personal remittances received (US$)",
+    "BX.TRF.PWKR.DT.GD.ZS": "Personal remittances (% of GDP)",
 }

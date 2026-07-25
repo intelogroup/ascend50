@@ -22,8 +22,8 @@ td{{padding:4px 8px;border-top:1px solid #eee;font-size:13px;vertical-align:top}
 </body></html>"""
 
 
-def section(title, cols, cursor):
-    rows = cursor.fetchall()
+def section(title, cols, cursor_or_list):
+    rows = cursor_or_list if isinstance(cursor_or_list, list) else cursor_or_list.fetchall()
     if not rows:
         return f"<h2>{html.escape(title)}</h2><p>(no data)</p>\n"
     h = f"<h2>{html.escape(title)} <span style=font-weight:400;font-size:13px;color:#888>({len(rows)} rows)</span></h2>\n<table><tr>"
@@ -63,6 +63,7 @@ def main():
         "macroeconomic_data","trade_data","bilateral_trade_dr",
         "local_production","plan_registry",
         "electricity_access","energy_production_consumption","renewable_potential",
+        "social_institutional_data",
     ]
     total_rows = 0
     trows = []
@@ -122,6 +123,11 @@ def main():
         content += bar_chart("NDC 2030 Renewable Targets (%)", [r[0] for r in ndc], [r[1] for r in ndc])
 
     content += section("NDC 2030 Targets", ["Type","Target %","Target"], db.execute("SELECT resource_type,metric_value||'%',metric_unit FROM renewable_potential WHERE metric_name='ndc_target_pct' AND location_id=1 ORDER BY resource_type"))
+
+    for dom in ["governance","justice","security","public_finance","education","diaspora","telecom","transport","climate"]:
+        rows = db.execute("SELECT sid.indicator,sid.value,sid.unit,tp.year,sid.source FROM social_institutional_data sid JOIN time_periods tp ON sid.period_id=tp.period_id WHERE sid.domain=? AND sid.location_id=1 ORDER BY tp.year DESC", (dom,)).fetchall()
+        if rows:
+            content += section(f"{dom.title()} Indicators", ["Indicator","Value","Unit","Year","Source"], rows)
 
     content += section("Strategic Plans", ["Plan","Lead","Timeframe","Year"], db.execute("SELECT plan_name,lead_org,timeframe,year_published FROM plan_registry ORDER BY year_published"))
 

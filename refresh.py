@@ -16,6 +16,7 @@ def print_summary(db):
         "macroeconomic_data", "trade_data", "bilateral_trade_dr",
         "local_production", "plan_registry",
         "electricity_access", "energy_production_consumption", "renewable_potential",
+        "social_institutional_data",
     ]
     print("\n=== DB Summary ===")
     total = 0
