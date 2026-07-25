@@ -29,36 +29,39 @@ def fetch_iom(db):
         return
 
     for _, row in data.iterrows():
-        total = row.get("IDPs", 0) or row.get("idps", 0) or row.get("total_idps", 0)
+        total = row.get("numPresentIdpInd", 0)
         if not total or total == 0:
             continue
 
-        date = str(row.get("ReportingDate", "") or row.get("reporting_date", ""))
-        year = date[:4] if len(date) >= 4 else ""
+        year = int(row.get("yearReportingDate", 0))
         if not year:
             continue
 
         db.execute(
             "INSERT OR IGNORE INTO time_periods (period_type, year) VALUES ('year', ?)",
-            (int(year),)
+            (year,)
         )
         pid = db.execute(
             "SELECT period_id FROM time_periods WHERE year=?",
-            (int(year),)
+            (year,)
         ).fetchone()[0]
 
-        round_n = row.get("RoundNumber", 0) or row.get("round_number", 0)
-        reason = row.get("DisplacementReason", "") or row.get("displacement_reason", "") or ""
-        origin = row.get("OriginLocation", "") or row.get("origin", "") or ""
-        male = row.get("Male", 0) or row.get("male_idps", 0) or 0
-        female = row.get("Female", 0) or row.get("female_idps", 0) or 0
+        import math
+        def f(v):
+            return int(v) if (v and not (isinstance(v, float) and math.isnan(v))) else 0
+        round_n = f(row.get("roundNumber", 0))
+        reason = str(row.get("displacementReason", "") or "")
+        origin = str(row.get("idpOriginAdmin1Name", "") or "")
+        male = f(row.get("numberMales", 0))
+        female = f(row.get("numberFemales", 0))
+        date = str(row.get("reportingDate", "") or "")
 
         db.execute("""INSERT OR IGNORE INTO displacement_data
             (location_id, period_id, total_idps, male_idps, female_idps,
              displacement_reason, origin_location, round_number, reporting_date, source)
             VALUES (?,?,?,?,?,?,?,?,?,?)""",
-            (loc_id, pid, int(total), int(male), int(female),
-             reason, origin, int(round_n), date, "IOM DTM"))
+            (loc_id, pid, int(total), male, female,
+             reason, origin, round_n, date, "IOM DTM"))
         inserted += 1
 
     db.commit()
